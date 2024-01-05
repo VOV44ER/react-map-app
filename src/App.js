@@ -1,4 +1,5 @@
-import MapComponent from './MapComponent';
+import MapComponent from "./Components/MapComponent";
+
 
 const App = () => {
   return (
