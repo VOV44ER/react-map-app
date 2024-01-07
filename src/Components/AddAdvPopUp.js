@@ -1,14 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 import { render } from "react-dom";
+import AddNewAdsModal from "./AddNewAdsModa";
 
 const AddAdvPopUp = ({ position, title }) => {
-    const map = useMap();
+  const [open, setOpen] = useState(false);
+ 
+  const handleOpen = () => setOpen(!open);
+
+  const map = useMap();
 
     useEffect(() => {
       const buttonClickHandler = () => {
-        console.log("Button clicked!");
+        handleOpen();
       };
   
       const containerDiv = document.createElement("div");
@@ -39,7 +44,7 @@ const AddAdvPopUp = ({ position, title }) => {
       };
     }, [map, position, title]);
   
-    return null;
+    return <AddNewAdsModal isOpen={open} handleOpen={handleOpen} />;
 };
 
 export default AddAdvPopUp;
