@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 import { render } from "react-dom";
-import AddNewAdsModal from "./AddNewAdsModa";
+import AddNewAdsModal from "./AddNewAdsModal";
+import { Button } from "@material-tailwind/react";
 
 const AddAdvPopUp = ({ position, title }) => {
   const [open, setOpen] = useState(false);
@@ -20,8 +21,8 @@ const AddAdvPopUp = ({ position, title }) => {
       containerDiv.id = "popup-container";
   
       render(
-        <div className="">
-          <button onClick={buttonClickHandler}>Створити</button>
+        <div>
+          <Button className="w-[80px] h-[35px] flex justify-center items-center" variant="outlined" onClick={buttonClickHandler}>Створити</Button>
         </div>,
         containerDiv
       );
@@ -43,8 +44,14 @@ const AddAdvPopUp = ({ position, title }) => {
         render(null, containerDiv);
       };
     }, [map, position, title]);
+
+    useEffect(() => {
+      if (open) {
+        map.closePopup();
+      }
+    }, [map, open]);
   
-    return <AddNewAdsModal isOpen={open} handleOpen={handleOpen} />;
+    return <AddNewAdsModal isOpen={open} handleOpen={handleOpen} position={position} />;
 };
 
 export default AddAdvPopUp;
