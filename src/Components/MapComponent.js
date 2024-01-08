@@ -4,10 +4,17 @@ import AddAdvPopUp from './AddAdvPopUp';
 import useAppDispatch from '../store/hooks/useAppDispatch';
 import { getAdsData } from '../store/thunks/applicationThunks';
 
-const MapEvents = ({ setNewMarker, onMoveEnd }) => {
+const MapEvents = ({ setNewMarker, onMoveEnd, onMarkerClick }) => {
   const map = useMapEvents({
     click(e) {
-      setNewMarker([e.latlng.lat, e.latlng.lng]);
+      if (!e.originalEvent.target.classList.contains('leaflet-marker-icon')) {
+        setNewMarker([e.latlng.lat, e.latlng.lng]);
+      } else {
+        const markerId = e.originalEvent.target.options.id;
+        if (onMarkerClick) {
+          onMarkerClick(markerId);
+        }
+      }
     },
     moveend() {
       if (onMoveEnd) {
@@ -18,9 +25,8 @@ const MapEvents = ({ setNewMarker, onMoveEnd }) => {
   return null;
 };
 
-const MapComponent = ({ center, zoom, allADS, onMoveEnd }) => {
+const MapComponent = ({ center, zoom, allADS, onMoveEnd, onMarkerClick }) => {
   const dispatch = useAppDispatch();
-
   const [newMarker, setNewMarker] = useState(null);
 
   useEffect(() => {
@@ -34,12 +40,22 @@ const MapComponent = ({ center, zoom, allADS, onMoveEnd }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       {allADS.map(ad => (
-        <Marker key={ad.id} position={ad.position}>
+        <Marker
+          key={ad.id}
+          position={ad.position}
+          eventHandlers={{
+            click: () => onMarkerClick(ad.id),
+          }}
+        >
           {/* Additional marker content here */}
         </Marker>
       ))}
       {newMarker && <AddAdvPopUp position={newMarker} />}
-      <MapEvents setNewMarker={setNewMarker} onMoveEnd={onMoveEnd} />
+      <MapEvents
+        setNewMarker={setNewMarker}
+        onMoveEnd={onMoveEnd}
+        onMarkerClick={onMarkerClick}
+      />
     </MapContainer>
   );
 };

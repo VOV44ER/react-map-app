@@ -7,9 +7,9 @@ import {
     Button,
 } from "@material-tailwind/react";
    
-const AdCard = ({ image, name, price, description }) => {
+const AdCard = ({ image, name, price, description, isSelected, id }) => {
     return (
-      <Card className="w-[320px]">
+      <Card className={`w-[320px] ${isSelected ? 'bg-yellow-200' : ''}`}>
         <CardHeader shadow={false} floated={false} className="h-[200px]">
           <img
               src={`data:image/png;base64,${image}`}
