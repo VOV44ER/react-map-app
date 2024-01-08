@@ -7,9 +7,9 @@ import {
     Button,
 } from "@material-tailwind/react";
    
-const AdCard = ({ image, name, price, description, isSelected, id }) => {
+const AdCard = ({ image, name, price, description, isSelected, id, handleMarkerClick }) => {
     return (
-      <Card className={`w-[320px] ${isSelected ? 'bg-yellow-200' : ''}`}>
+      <Card className={`w-[320px] ${isSelected ? 'bg-[#82d173]' : ''}`}>
         <CardHeader shadow={false} floated={false} className="h-[200px]">
           <img
               src={`data:image/png;base64,${image}`}
@@ -36,11 +36,12 @@ const AdCard = ({ image, name, price, description, isSelected, id }) => {
         </CardBody>
         <CardFooter className="pt-0">
           <Button
+            onClick={() => handleMarkerClick(id)}
             ripple={false}
             fullWidth={true}
             className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
           >
-            Add to Cart
+            Показати на мапі
           </Button>
         </CardFooter>
       </Card>

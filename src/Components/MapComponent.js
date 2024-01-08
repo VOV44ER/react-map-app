@@ -3,6 +3,9 @@ import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 import AddAdvPopUp from './AddAdvPopUp';
 import useAppDispatch from '../store/hooks/useAppDispatch';
 import { getAdsData } from '../store/thunks/applicationThunks';
+import defaultMarker from '../assets/defaultMarker.svg';
+import selectedMarker from '../assets/selectedMarker.svg';
+import L from "leaflet";
 
 const MapEvents = ({ setNewMarker, onMoveEnd, onMarkerClick }) => {
   const map = useMapEvents({
@@ -25,7 +28,7 @@ const MapEvents = ({ setNewMarker, onMoveEnd, onMarkerClick }) => {
   return null;
 };
 
-const MapComponent = ({ center, zoom, allADS, onMoveEnd, onMarkerClick }) => {
+const MapComponent = ({ center, zoom, allADS, onMoveEnd, onMarkerClick, selectedAdId }) => {
   const dispatch = useAppDispatch();
   const [newMarker, setNewMarker] = useState(null);
 
@@ -46,6 +49,12 @@ const MapComponent = ({ center, zoom, allADS, onMoveEnd, onMarkerClick }) => {
           eventHandlers={{
             click: () => onMarkerClick(ad.id),
           }}
+          icon={L.icon({
+            iconUrl: selectedAdId === ad.id ? selectedMarker : defaultMarker,
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+          })}
         >
           {/* Additional marker content here */}
         </Marker>

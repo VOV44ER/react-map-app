@@ -53,6 +53,7 @@ const App = () => {
             price={price}
             description={description}
             isSelected={id === selectedAdId}
+            handleMarkerClick={handleMarkerClick}
           />
         ))}
       </div>
