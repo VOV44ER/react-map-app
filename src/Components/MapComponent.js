@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 import AddAdvPopUp from './AddAdvPopUp';
 import useAppDispatch from '../store/hooks/useAppDispatch';
-import useAppSelector from '../store/hooks/useAppSelector';
 import { getAdsData } from '../store/thunks/applicationThunks';
 
 const MapEvents = ({ setNewMarker }) => {
@@ -14,9 +13,9 @@ const MapEvents = ({ setNewMarker }) => {
   return false;
 }
 
-const MapComponent = ({ center, zoom }) => {
+const MapComponent = ({ center, zoom, allADS }) => {
   const dispatch = useAppDispatch();
-  const { allADS } = useAppSelector(store => store.ads);
+
   const [newMarker, setNewMarker] = useState(null);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const MapComponent = ({ center, zoom }) => {
   }, []);
 
   return (
-    <MapContainer center={center} zoom={zoom} style={{ height: '100vh', width: '100%' }}>
+    <MapContainer center={center} zoom={zoom} style={{ height: '100vh', width: 'calc(100% - 350px)' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
