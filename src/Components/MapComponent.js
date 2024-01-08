@@ -4,16 +4,21 @@ import AddAdvPopUp from './AddAdvPopUp';
 import useAppDispatch from '../store/hooks/useAppDispatch';
 import { getAdsData } from '../store/thunks/applicationThunks';
 
-const MapEvents = ({ setNewMarker }) => {
-  useMapEvents({
+const MapEvents = ({ setNewMarker, onMoveEnd }) => {
+  const map = useMapEvents({
     click(e) {
       setNewMarker([e.latlng.lat, e.latlng.lng]);
     },
+    moveend() {
+      if (onMoveEnd) {
+        onMoveEnd(map.getBounds());
+      }
+    },
   });
-  return false;
-}
+  return null;
+};
 
-const MapComponent = ({ center, zoom, allADS }) => {
+const MapComponent = ({ center, zoom, allADS, onMoveEnd }) => {
   const dispatch = useAppDispatch();
 
   const [newMarker, setNewMarker] = useState(null);
@@ -34,7 +39,7 @@ const MapComponent = ({ center, zoom, allADS }) => {
         </Marker>
       ))}
       {newMarker && <AddAdvPopUp position={newMarker} />}
-      <MapEvents setNewMarker={setNewMarker} />
+      <MapEvents setNewMarker={setNewMarker} onMoveEnd={onMoveEnd} />
     </MapContainer>
   );
 };
