@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/react-map-app/static/css/main.9efc54ec.css",
-    "main.js": "/react-map-app/static/js/main.f9f2d763.js",
+    "main.js": "/react-map-app/static/js/main.b58b60bc.js",
     "static/js/651.b4bebb42.chunk.js": "/react-map-app/static/js/651.b4bebb42.chunk.js",
     "static/media/defaultMarker.svg": "/react-map-app/static/media/defaultMarker.93e84d954260dc6996045f8e89191fc8.svg",
     "static/media/selectedMarker.svg": "/react-map-app/static/media/selectedMarker.a486bf7a4a404b53e8d05baa6c2776aa.svg",
     "index.html": "/react-map-app/index.html",
     "main.9efc54ec.css.map": "/react-map-app/static/css/main.9efc54ec.css.map",
-    "main.f9f2d763.js.map": "/react-map-app/static/js/main.f9f2d763.js.map",
+    "main.b58b60bc.js.map": "/react-map-app/static/js/main.b58b60bc.js.map",
     "651.b4bebb42.chunk.js.map": "/react-map-app/static/js/651.b4bebb42.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9efc54ec.css",
-    "static/js/main.f9f2d763.js"
+    "static/js/main.b58b60bc.js"
   ]
 }
