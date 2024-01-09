@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5001/';
+axios.defaults.baseURL = 'https://test-task-server-jzuc.onrender.com/';
 
 const axiosInstance = axios.create();
 
